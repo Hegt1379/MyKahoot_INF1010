@@ -31,7 +31,7 @@ public class Server extends JFrame implements Runnable , Updatable{
 		}
 		isRunning = true;
 		portNumber = 5555;
-       /* try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
+		try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
             System.out.println("Server opened on port " + portNumber);
 
             this.serverSocket = serverSocket;
@@ -49,7 +49,7 @@ public class Server extends JFrame implements Runnable , Updatable{
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 	
 	public void sendQuestion() {
