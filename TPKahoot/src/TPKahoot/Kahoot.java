@@ -23,45 +23,27 @@ public class Kahoot {
 	}
 	
 	static void CreatClient() {
-
+/*
 		Client client = new Client("127.0.0.1", 5555);
 		Thread clientThread = new Thread(client);
 		clientThread.start();
 		String message = JOptionPane.showInputDialog("Entrez le message a envoyer au serveur");
 		
-		client.sendData(message);//Envoie le message au seveur
+		client.sendData(message);//Envoie le message au seveur*/
 		
 	}
 	
 	static void CreatServer() {
-		
+		/*
 		Server server = new Server(5555);
 		Thread serverThread = new Thread(server);
 		serverThread.start();
 		JOptionPane.showMessageDialog(null, "click okay to send question");
 		server.sendQuestion();
 		JOptionPane.showMessageDialog(null, "Click okay to close the server");
-		server.closeServer();
+		server.closeServer();*/
+
+		KahootUIServer serverWindow = new KahootUIServer();
 	}
-	
-    public static String[] readQuestionFile(String filePath) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            StringBuilder question = new StringBuilder();
-            StringBuilder answers = new StringBuilder();
-
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Q:")) {
-                    // Extract question
-                    question.append(line.substring(2).trim());
-                } else if (line.startsWith("R:")) {
-                    // Extract answers
-                    answers.append(line.substring(2).trim());
-                }
-            }
-
-            return new String[]{question.toString(), answers.toString()};
-        }
-    }
 
 }

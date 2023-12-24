@@ -4,25 +4,22 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Server extends JFrame implements Runnable , Updatable{
+public class Server implements Runnable{
 
 	private ArrayList<Thread> connectionThread;
 	private ArrayList<Connection> connections;
 	private int portNumber;
 	private ServerSocket serverSocket;
 	private boolean isRunning = false;
+	private KahootUIServer ui;
 	
-	public Server(int portNumber) {
+	public Server(int portNumber, KahootUIServer ui) {
+		this.ui = ui;
 		connectionThread = new ArrayList<Thread>();
 		connections = new ArrayList<Connection>();
 		this.portNumber = portNumber;
-		
-		setTitle("sss");
-		setBounds(200,200,700,500);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public void run() {
@@ -41,7 +38,7 @@ public class Server extends JFrame implements Runnable , Updatable{
                 JOptionPane.showMessageDialog(null, "New connection from " + clientSocket.getInetAddress());
 
                 // Handle each client in a separate thread
-                Connection connection = new Connection(clientSocket);
+                Connection connection = new Connection(clientSocket, ui);
                 Thread connectionThread = new Thread(connection);
                 connectionThread.start();
                 this.connectionThread.add(connectionThread);
@@ -52,9 +49,9 @@ public class Server extends JFrame implements Runnable , Updatable{
         }
     }
 	
-	public void sendQuestion() {
+	public void sendQuestion(String[] questions) {
 		for (Connection connection : connections) {
-			connection.sendData("This is a question");
+			connection.sendData(questions);
 		}
 	}
 	

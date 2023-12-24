@@ -13,10 +13,12 @@ public class Connection implements Runnable{
 	
     PrintWriter out;
     Scanner in;
+	Player player;
+	KahootUIServer ui;
     
     
-	public Connection(Socket clientSocket) {
-		
+	public Connection(Socket clientSocket, KahootUIServer ui) {
+		this.ui = ui;
         try {
 			out = new PrintWriter(clientSocket.getOutputStream(), true);
 	        in = new Scanner(new InputStreamReader(clientSocket.getInputStream()));   
@@ -32,7 +34,12 @@ public class Connection implements Runnable{
 		        String incomming;
 				if (in.hasNextLine()) {
 					incomming = in.nextLine();
-			        sendData("Conferming message: " + incomming);
+					if (incomming.startsWith("NC:")){
+						ui.addPlayer(incomming.substring(3).trim(), this);
+					}
+					if (incomming.startsWith("RP:")){
+						ui.gotAnswer(incomming.substring(3).trim(), this);
+					}
 				}
 		}
 	        	
@@ -40,6 +47,18 @@ public class Connection implements Runnable{
 	
 	public void sendData(String msg) {
 		this.out.println(msg);
+	}
+
+	public void sendData(String[] msg){
+		this.out.println("NQ:" + msg[0] + "/" + msg[1]);
+	}
+
+	public void setPlayer(Player player){
+		this.player = player;
+	}
+
+	public Player getPlayer(){
+		return player;
 	}
 	
 }

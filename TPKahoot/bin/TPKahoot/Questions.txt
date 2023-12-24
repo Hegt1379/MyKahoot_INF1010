@@ -1,0 +1,7 @@
+Q:Quel est la capital du Québec?
+C:Trois-Rivières/Québec/Montréal/Ottawa
+R:Québec
+-
+Q:Quel est la couleur d'une babnane?
+C:Blue/Rouge/Vert/Jaune
+R:Jaune
