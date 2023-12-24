@@ -56,7 +56,7 @@ public class KahootUIServer extends JFrame {
         setVisible(true);
 
         try {
-            Questions = readQuestionFile("C:\\Users\\gab77\\Desktop\\ \\MyKahoot_INF1010\\TPKahoot\\src\\TPKahoot\\Questions.txt");
+            Questions = readQuestionFile("src/TPKahoot/Questions.txt");
         } catch (IOException e1) {
             e1.printStackTrace();
         }
